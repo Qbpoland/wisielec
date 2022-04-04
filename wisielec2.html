@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jakub Stasiuk</title>
+    <link rel="stylesheet" href="arkusz.css">
+</head>
+<body>
+ <h1>Wisielec</h1>
+ <div id="szubienica">
+    <img src="img/s0.jpg">
+</div>
+<div id="box"></div>
+    <div id="klaw"></div>
+    
+    <script>
+    function alfabet(charA, charZ) {
+     var abc = [], x = charA.charCodeAt(0), y = charZ.charCodeAt(0);
+     for (; x <= y; ++x) {
+          abc.push(String.fromCharCode(x));
+     }
+     return abc;
+    }
+      let a = alfabet('A', 'Z');
+
+      for (let i = 0; i < a.length; i++){
+      let b = document.createElement('button');
+      b.innerHTML =a[i];
+      b.addEventListener('click' , przycisk);
+      document.getElementById("klaw").appendChild(b)
+      }
+    function przycisk(event){
+     let b = event.srcElement.innerHTML;
+     console.log(b)
+    }
+    var slowo =  window.prompt("Podaj słowo: ")
+    for(var i =0  ; i < slowo.length ; i++){
+    document.getElementById("box").innerHTML  +="_  "; }
+    
+    
+
+
+
+
+    </script>
+    
+
+</body>
+</html>
