@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jakub Stasiuk</title>
+    <link rel="stylesheet" href="arkusz.css">
+</head>
+<body >
+<h1>Wisielec</h1>
+<img id="szubienica" src="img/0.jpg"> <!--Szubienica -->
+<div id="points"></div>    <!-- udane próby -->
+<div id="fails"></div>    <!-- liczba prób-->
+<div id="textbox"></div>  <!-- Miejsce gry -->
+
+<div id="keyboard"></div> <!-- klawiatura ekranowa -->
+</div>
+
+
+<script>
+
+function showWord(password) {
+    var buffor = "";
+    for (var i = 0; i < password.length; i++) {
+        if (guessed[i]){
+            buffor += password[i];
+        } else {
+            buffor += "_ ";
+        }
+    }
+    
+    document.getElementById("textbox").innerHTML = buffor;
+    
+    document.getElementById("points").innerHTML = "Points: " + points + "/" + password.length;
+    document.getElementById("fails").innerHTML = "Fails: " + fails + "/8";
+    
+    if (fails >= 8) {
+        document.getElementById("szubienica").src = "img/9.jpg";
+    } else {
+        document.getElementById("szubienica").src = "img/" + fails + ".jpg";
+    }
+}
+
+var password = window.prompt("podaj słowo do gry").toUpperCase();
+for (var i = 65; i <= 90; i++) {
+    for (var x = 0; x <password.length; x++)
+
+var guessed = []; //true/false
+var points = 0;
+var fails = 0;
+
+for (var i = 0; i < password.length; i++) {
+    document.getElementById("textbox").innerHTML += "_ "; //box
+    guessed.push(false);
+}
+document.getElementById("points").innerHTML = "Points: " + points + "/" + password.length; //licznik punktów
+document.getElementById("fails").innerHTML = "Fails: 0/8"; //licznik prób 
+
+var button;
+var asciiChar;
+for (var i = 65; i <= 90; i++) { //klawiatura 65-a 90-z
+    asciiChar = String.fromCharCode(i);
+
+    button = document.createElement("button");  //przyciski
+    button.id = i;
+    button.innerText = asciiChar;
+    button.addEventListener("click",
+        function() {
+            var present = false;
+            for (var i = 0; i < password.length; i++) {
+                if (password[i] == String.fromCharCode(this.id)) {
+                    present = true;
+                    points++;
+                    guessed[i] = true;
+
+                }
+            }
+            if (!present) {
+                    fails++;
+                }
+
+            this.disabled = true;
+            showWord(password);
+            endGame(points, fails, password);
+        }
+    );
+
+ document.getElementById("keyboard").appendChild(button);
+
+}}
+function endGame(points, fails, password) {   //opcja wygrana/przegana powiadomienie
+    if (fails >= 8) {
+        window.alert("Przegrałeś");
+    } else if (points == password.length) {
+        window.alert("wygrałeś !");
+    }
+}
+</script>
+    
+</body>
+</html>
